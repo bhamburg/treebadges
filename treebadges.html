@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Testing Team Treehouse jQuery AJAX Plugin</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+        var username = 'brianhamburg';
+        if(username) {
+            var treehouseJSON = 'http://teamtreehouse.com/' + username + '.json';
+            $.getJSON(treehouseJSON, function(result){
+                $('#treebadges').append('<p class="points">Total Points: ' + result.points.total + '</p>');
+                $.each(result.badges, function(i, badge){
+                    $('#treebadges').append('<a class="treebadge" href="' + badge.url + '" title="' + badge.name + '"><img src="' + badge.icon_url + '" alt="' + badge.name + '"></a>');
+                });
+            });
+        } else {
+            alert('Treebadges Error: You must provide a username.');
+        }
+    </script>
+    <style>
+        .treebadge img {
+            width: 64px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Team Treehouse Badges</h1>
+    <div id="treebadges"></div>
+</body>
+</html>
